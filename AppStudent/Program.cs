@@ -191,6 +191,18 @@ namespace AppStudent
 
         }
 
+        public bool isEmpty() 
+        {
+            for (int i = 0; i < numberStudents; i++ )
+            {
+                if (students[i].Name == null)
+                {
+                    return true;
+                }
+               
+            }
+            return false;
+        }
 
         static void removeStudentInArray(string readSurname)
         {
