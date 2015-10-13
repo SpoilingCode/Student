@@ -115,7 +115,7 @@ namespace AppStudent
                     else name = value;
 
                 }
-                else throw new Exception("Имя студента задано и не может быть изменено данным способом.");
+                
 
             }
 
@@ -138,7 +138,7 @@ namespace AppStudent
                     else lastName = value;
 
                 }
-                else throw new Exception("Фамилия студента задана и не может быть изменено данным способом.");
+              
 
             }
 
@@ -161,7 +161,7 @@ namespace AppStudent
                     else patronymic = value;
 
                 }
-                else throw new Exception("Отчество студента задано и не может быть изменено данным способом.");
+               
 
             }
 
@@ -221,24 +221,56 @@ namespace AppStudent
 
         public void inputDataAboutStudents()
         {
+           
+                Console.WriteLine("Введите имя cтудента:");
+                Name = Console.ReadLine();
+                if ( Name == "" )
+                {
+                    throw new Exception("Вы ничего не ввели.Повторите ввод.");
+                }
+              
 
-            Console.WriteLine("Введите имя cтудента:");
-            Name = Console.ReadLine();
+                Console.WriteLine("Введите отчество студента:");
+                Patronymic = Console.ReadLine();
+                if ( Patronymic == "" )
+                {
+                    throw new Exception("Вы ничего не ввели.Повторите ввод.");
+                }
+               
 
-            Console.WriteLine("Введите отчество студента:");
-            Patronymic = Console.ReadLine();
+                Console.WriteLine("Введите фамилию студента:");
+                LastName = Console.ReadLine();
+                if ( LastName == "" )
+                {
+                    throw new Exception("Вы ничего не ввели.Повторите ввод.");
+                } 
+              
 
-            Console.WriteLine("Введите фамилию студента:");
-            LastName = Console.ReadLine();
+                Console.WriteLine("Введите день рождения студента:");
+                Day_birth = int.Parse(Console.ReadLine());
+                if (Day_birth < 1 || Day_birth > 31)
+                {
+                    throw new Exception("День рождения указан неверно.Значение должно быть в интервале [1, 31]");
+                } 
+               
 
-            Console.WriteLine("Введите день рождения студента:");
-            day_birth = int.Parse(Console.ReadLine());
+                Console.WriteLine("Введите месяц рождения студента:");
+                Month_birth = Convert.ToInt32(Console.ReadLine());
+                if (Month_birth < 1|| Month_birth > 12)
+                {
+                    throw new Exception("Месяц рождения указан неверно.Значение должно быть в интервале [1, 12]");
+                }
+                
 
-            Console.WriteLine("Введите месяц рождения студента:");
-            month_birth = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Введите год рождения студента:");
-            year_birth = int.Parse(Console.ReadLine());
+                Console.WriteLine("Введите год рождения студента:");
+                Year_birth = int.Parse(Console.ReadLine());
+                if (Year_birth < 1985 ||  Year_birth > 2015)
+                {
+                  throw new Exception("Год рождения указан неверно.Значение должно быть в интервале [1985, 2015]");
+                }
+             
+            
+            
 
         }
 
