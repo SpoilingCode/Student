@@ -217,12 +217,7 @@ namespace AppStudent
             }
 
         }
-
-
-        public bool isEmpty()
-        {
-            return Name != "Unknown";
-        }
+      
 
         public void inputDataAboutStudents()
         {
@@ -273,11 +268,9 @@ namespace AppStudent
                 {
                   throw new Exception("Год рождения указан неверно.Значение должно быть в интервале [1985, 2015]");
                 }
-             
-            
-            
-
         }
+
+      
 
         public void outputDataAboutStudents()
         {
@@ -285,6 +278,15 @@ namespace AppStudent
             Console.Write(" ФИО: {0} {1} {2}  Дата Рождения: {3}.{4}.{5}\n", lastName, name, patronymic, day_birth, month_birth, year_birth);
         }
 
+        public void makeEmpty()
+        {
+            name = "Unknown";
+        }
+
+        public bool isEmpty()
+        {
+            return name == "Unknown";
+        }
 
 
         public static void findStudentsByYearBirth(Student[] arrStudents, int numbersStudents, int readYearBirth)

@@ -181,7 +181,7 @@ namespace AppStudent
                 
                 for (int i = 0; i < numberStudents; i++)
                 {
-                    if (students[i].isEmpty())
+                    if (!students[i].isEmpty())
                         students[i].outputDataAboutStudents();
 
                     
@@ -192,7 +192,7 @@ namespace AppStudent
         }
 
 
-       
+        
 
         static void removeStudentInArray(string readSurname)
         {
@@ -202,15 +202,24 @@ namespace AppStudent
             }
             else
             {
-                numberStudents--;
-                Student[] arrStudents = students.Where(s => s.LastName != readSurname).ToArray();
-                Array.Copy(arrStudents, students, numberStudents);
+                
+                Student[] arrStudents = students.Where(s => s.LastName != readSurname && !s.isEmpty()).ToArray();
+                for (int i = 0; i < numberStudents; i++)
+                {
+                    if (arrStudents.Length > i)
+                    {
+                        students[i] = arrStudents[i];
+                    }
+                    else
+                        students[i].makeEmpty();
+                }
+
+              
                
                 for (int i = 0; i < numberStudents ; i++)
                 {
-                    if (students[i].isEmpty())
+                    if (!students[i].isEmpty())
                         students[i].outputDataAboutStudents();
-
                     else numberStudents--;
                 }
               
