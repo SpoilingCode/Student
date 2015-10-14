@@ -148,7 +148,7 @@ namespace AppStudent
                 catch (Exception ex)
                 {
 
-                    Console.WriteLine("Exception:{0}\nFile:{1}\nLocation:{2}\n{3}", ex.Message, ex.Source, ex.TargetSite, ex.StackTrace);
+                    Console.WriteLine("Exception:{0}\nFile:{1}\nLocation:{2}\n{3}", ex.Message, ex.Source, ex.TargetSite);
                     Console.WriteLine("Для продолжения нажмите Enter");
                     Console.ReadKey();
 
@@ -181,28 +181,18 @@ namespace AppStudent
                 
                 for (int i = 0; i < numberStudents; i++)
                 {
-                    if (!(students[i].Name == null))
+                    if (!students[i].isEmpty())
                         students[i].outputDataAboutStudents();
-                    else numberStudents --;
+
                     
                 }
-               
+                
             }
 
         }
 
-        public bool isEmpty() 
-        {
-            for (int i = 0; i < numberStudents; i++ )
-            {
-                if (students[i].Name == null)
-                {
-                    return true;
-                }
-               
-            }
-            return false;
-        }
+
+       
 
         static void removeStudentInArray(string readSurname)
         {
@@ -215,16 +205,15 @@ namespace AppStudent
                 numberStudents--;
                 Student[] arrStudents = students.Where(s => s.LastName != readSurname).ToArray();
                 Array.Copy(arrStudents, students, numberStudents);
-                
+               
                 for (int i = 0; i < numberStudents ; i++)
                 {
-                    if (!(students[i].Name == null))
+                    if (!students[i].isEmpty())
                         students[i].outputDataAboutStudents();
-                    else
-                     numberStudents--;
 
+                    else numberStudents--;
                 }
-            
+              
                
             }
         }

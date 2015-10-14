@@ -8,6 +8,7 @@ namespace AppStudent
 {
     class Student
     {
+       
         static public int quantityObjects = 0;
 
         string name;
@@ -17,7 +18,7 @@ namespace AppStudent
         int month_birth;
         int year_birth;
 
-
+      
         public Student()
         {
 
@@ -32,8 +33,7 @@ namespace AppStudent
         }
 
 
-        public Student(string _lastName)
-            : this()
+        public Student(string _lastName) : this()
         {
 
             if (_lastName != "") lastName = _lastName;
@@ -219,6 +219,16 @@ namespace AppStudent
         }
 
 
+        public bool isEmpty()
+        {
+            Student student = new Student();
+           if( student == null )
+           {
+               return true;
+           }
+              return false;
+        }
+
         public void inputDataAboutStudents()
         {
            
@@ -304,7 +314,7 @@ namespace AppStudent
         }
 
 
-        public static int operator -(Student firstStudent, Student secondStudent)
+        public static int operator - (Student firstStudent, Student secondStudent)
         {
             DateTime dateBirthFirstStudent = new DateTime(firstStudent.Year_birth, firstStudent.Month_birth, firstStudent.Day_birth);
             DateTime dateBirthSecondStudent = new DateTime(secondStudent.Year_birth, secondStudent.Month_birth, secondStudent.Day_birth);
