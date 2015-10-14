@@ -221,12 +221,7 @@ namespace AppStudent
 
         public bool isEmpty()
         {
-            Student student = new Student();
-           if( student == null )
-           {
-               return true;
-           }
-              return false;
+            return Name != "Unknown";
         }
 
         public void inputDataAboutStudents()

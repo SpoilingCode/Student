@@ -181,7 +181,7 @@ namespace AppStudent
                 
                 for (int i = 0; i < numberStudents; i++)
                 {
-                    if (!students[i].isEmpty())
+                    if (students[i].isEmpty())
                         students[i].outputDataAboutStudents();
 
                     
@@ -208,7 +208,7 @@ namespace AppStudent
                
                 for (int i = 0; i < numberStudents ; i++)
                 {
-                    if (!students[i].isEmpty())
+                    if (students[i].isEmpty())
                         students[i].outputDataAboutStudents();
 
                     else numberStudents--;
