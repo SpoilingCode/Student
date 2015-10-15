@@ -183,8 +183,6 @@ namespace AppStudent
                 {
                     if (!students[i].isEmpty())
                         students[i].outputDataAboutStudents();
-
-                    
                 }
                 
             }
@@ -204,24 +202,30 @@ namespace AppStudent
             {
                 
                 Student[] arrStudents = students.Where(s => s.LastName != readSurname && !s.isEmpty()).ToArray();
-                for (int i = 0; i < numberStudents; i++)
+                for (int i = 0; i < students.Length; i++)
                 {
                     if (arrStudents.Length > i)
                     {
                         students[i] = arrStudents[i];
+                       
                     }
                     else
                         students[i].makeEmpty();
                 }
 
-              
-               
-                for (int i = 0; i < numberStudents ; i++)
+                for (int i = 0; i < students.Length; i++ )
                 {
-                    if (!students[i].isEmpty())
-                        students[i].outputDataAboutStudents();
-                    else numberStudents--;
+                    if( !students[i].isEmpty() )
+                    students[i].outputDataAboutStudents();
                 }
+
+                Console.WriteLine("\n");
+                for (int i = 0; i < arrStudents.Length; i++)
+                {
+                   
+                        arrStudents[i].outputDataAboutStudents();
+                }
+                
               
                
             }
