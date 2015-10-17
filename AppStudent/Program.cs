@@ -200,20 +200,19 @@ namespace AppStudent
             }
             else
             {
-                Student[] arrStudents = new Student[students.Length];
-
-                for(int i = 0, j = 0; i < students.Length; i++)
+                
+                for(int i = 0, j = 0; i < students.Length; i++, j++)
                 {
 
-                    if (!students[i].isEmpty() && students[i].LastName != readSurname)
+                    if ( !students[i].isEmpty() && students[i].LastName != readSurname )
                     {
                         students[j] = students[i];
-                        j++;
+                        
                     }
-                    else 
+                     else 
                     {
                         students[i].makeEmpty(); 
-                        students[j] = students[i]; 
+                        students[j] = students[i];
                     }
                 }
                
@@ -285,7 +284,7 @@ namespace AppStudent
         }
 
 
-        public static int j { get; set; }
+        
     }
 
 }
