@@ -317,10 +317,10 @@ namespace AppStudent
         }
 
 
-        public static int operator - (Student firstStudent, Student secondStudent)
+        public static int operator - ( Student firstStudent, Student secondStudent )
         {
-            DateTime dateBirthFirstStudent = new DateTime(firstStudent.Year_birth, firstStudent.Month_birth, firstStudent.Day_birth);
-            DateTime dateBirthSecondStudent = new DateTime(secondStudent.Year_birth, secondStudent.Month_birth, secondStudent.Day_birth);
+            DateTime dateBirthFirstStudent = new DateTime( firstStudent.Year_birth, firstStudent.Month_birth, firstStudent.Day_birth );
+            DateTime dateBirthSecondStudent = new DateTime( secondStudent.Year_birth, secondStudent.Month_birth, secondStudent.Day_birth );
 
             TimeSpan timeSpan = dateBirthFirstStudent - dateBirthSecondStudent;
 

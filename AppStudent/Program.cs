@@ -139,7 +139,7 @@ namespace AppStudent
                                 removeStudentInArray(readSurname);
                                 break;
                             }
-                        default: Console.WriteLine("Ошибка ввода\n"); break;
+                        default: Console.WriteLine( "Ошибка ввода\n" ); break;
 
                     }
 
@@ -148,8 +148,8 @@ namespace AppStudent
                 catch (Exception ex)
                 {
 
-                    Console.WriteLine("Exception:{0}\nFile:{1}\nLocation:{2}\n{3}", ex.Message, ex.Source, ex.TargetSite);
-                    Console.WriteLine("Для продолжения нажмите Enter");
+                    Console.WriteLine( "Exception:{0}\nFile:{1}\nLocation:{2}\n{3}", ex.Message, ex.Source, ex.TargetSite );
+                    Console.WriteLine( "Для продолжения нажмите Enter" );
                     Console.ReadKey();
 
                 }
@@ -162,24 +162,24 @@ namespace AppStudent
         static void addStudent()
         {
 
-            if (numberStudents < maxNumberStudents)
+            if ( numberStudents < maxNumberStudents )
             {
                 students[numberStudents].inputDataAboutStudents();
                 numberStudents++;
             }
-            else Console.WriteLine("Невозможно добавить студента.Массив заполнен.");
+            else Console.WriteLine( "Невозможно добавить студента.Массив заполнен." );
 
         }
 
         static void outputArrayStudents()
         {
 
-            if (numberStudents == 0) Console.WriteLine("Нет студентов в списке");
+            if ( numberStudents == 0 ) Console.WriteLine("Нет студентов в списке");
 
             else
             {
                 
-                for (int i = 0; i < numberStudents; i++)
+                for ( int i = 0; i < numberStudents; i++ )
                 {
                     if (!students[i].isEmpty())
                         students[i].outputDataAboutStudents();
@@ -192,16 +192,16 @@ namespace AppStudent
 
         
 
-        static void removeStudentInArray(string readSurname)
+        static void removeStudentInArray( string readSurname )
         {
-            if (readSurname == "")
+            if ( readSurname == "" )
             {
-                Console.WriteLine("Ничего не введено.Попробуйте ещё раз!");
+                Console.WriteLine( "Ничего не введено.Попробуйте ещё раз!" );
             }
             else
             {
                 
-                for(int i = 0, j = 0; i < students.Length; i++, j++)
+                for( int i = 0, j = 0; i < students.Length; i++, j++ )
                 {
 
                     if ( !students[i].isEmpty() && students[i].LastName != readSurname )
@@ -217,9 +217,9 @@ namespace AppStudent
                 }
                
 
-                for (int i = 0; i < students.Length; i++)
+                for ( int i = 0; i < students.Length; i++ )
                 {
-                    if (!students[i].isEmpty())
+                    if ( !students[i].isEmpty() )
                         students[i].outputDataAboutStudents(); 
                 }
             }
@@ -229,30 +229,30 @@ namespace AppStudent
         static void new_array()
         {
 
-            Console.WriteLine("Будете вводить данные с клавиатуры?(y/n)");
-            char readStr = char.Parse(Console.ReadLine());
+            Console.WriteLine( "Будете вводить данные с клавиатуры?(y/n)" );
+            char readStr = char.Parse( Console.ReadLine() );
 
-            if (readStr == 'y' || readStr == 'Y')
+            if ( readStr == 'y' || readStr == 'Y' )
             {
 
-                Console.WriteLine("Введите количество студентов < " + maxNumberStudents);
+                Console.WriteLine( "Введите количество студентов < " + maxNumberStudents );
                 string readNumber = Console.ReadLine();
                 int quantityStudents = int.Parse( readNumber );
                
-                 if(!int.TryParse(readNumber, out quantityStudents))
+                 if( !int.TryParse(readNumber, out quantityStudents) )
                 {
-                    throw new Exception("Некорректный ввод.Введите число!");
+                    throw new Exception( "Некорректный ввод.Введите число!" );
                 }
                  else 
                  {
                  
 
-                   for (int i = 1; i <= quantityStudents; i++)
+                   for ( int i = 1; i <= quantityStudents; i++ )
                    {
                        addStudent();
                    }
 
-                Console.WriteLine("\nФормирование списка завершено.");
+                Console.WriteLine( "\nФормирование списка завершено." );
                  
                  }
             }
