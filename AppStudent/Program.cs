@@ -201,27 +201,30 @@ namespace AppStudent
             else
             {
                 
-                for( int i = 0, j = 0; i < students.Length; i++, j++ )
-                {
+              Student[] arrStudents = new Student[ students.Length ];
 
-                    if ( !students[i].isEmpty() && students[i].LastName != readSurname )
-                    {
-                        students[j] = students[i];
-                        
-                    }
-                     else 
-                    {
-                        students[i].makeEmpty(); 
-                        students[j] = students[i];
-                    }
-                }
-               
-
-                for ( int i = 0; i < students.Length; i++ )
-                {
-                    if ( !students[i].isEmpty() )
-                        students[i].outputDataAboutStudents(); 
-                }
+              for (int i = 0, j = 0; i < students.Length; i++, j++ )
+              {
+                  if (students[i].LastName != readSurname && !students[i].isEmpty())
+                  {
+                      arrStudents[j] = students[i];
+                  }
+                  else
+                  {
+                     students[i].makeEmpty();
+                     arrStudents[j] = students[i];
+                  }
+              }
+             
+                Array.Copy( arrStudents, students, students.Length );
+             
+                for (int i = 0; i < students.Length; i++ )
+              {
+                  if ( !students[i].isEmpty() )
+                  {
+                      students[i].outputDataAboutStudents();
+                  }
+              }
             }
         }
 
