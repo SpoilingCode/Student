@@ -153,7 +153,7 @@ namespace AppStudent
                     Console.ReadKey();
 
                 }
-
+               
 
 
             }
@@ -200,34 +200,29 @@ namespace AppStudent
             }
             else
             {
-                
-                Student[] arrStudents = students.Where(s => s.LastName != readSurname && !s.isEmpty()).ToArray();
+                Student[] arrStudents = new Student[students.Length];
+
+                for(int i = 0, j = 0; i < students.Length; i++)
+                {
+
+                    if (!students[i].isEmpty() && students[i].LastName != readSurname)
+                    {
+                        students[j] = students[i];
+                        j++;
+                    }
+                    else 
+                    {
+                        students[i].makeEmpty(); 
+                        students[j] = students[i]; 
+                    }
+                }
+               
+
                 for (int i = 0; i < students.Length; i++)
                 {
-                    if (arrStudents.Length > i)
-                    {
-                        students[i] = arrStudents[i];
-                       
-                    }
-                    else
-                        students[i].makeEmpty();
+                    if (!students[i].isEmpty())
+                        students[i].outputDataAboutStudents(); 
                 }
-
-                for (int i = 0; i < students.Length; i++ )
-                {
-                    if( !students[i].isEmpty() )
-                    students[i].outputDataAboutStudents();
-                }
-
-                Console.WriteLine("\n");
-                for (int i = 0; i < arrStudents.Length; i++)
-                {
-                   
-                        arrStudents[i].outputDataAboutStudents();
-                }
-                
-              
-               
             }
         }
 
@@ -289,6 +284,8 @@ namespace AppStudent
 
         }
 
+
+        public static int j { get; set; }
     }
 
 }

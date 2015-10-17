@@ -280,12 +280,18 @@ namespace AppStudent
 
         public void makeEmpty()
         {
-           name = "Unknown";
+            name = "Unknown";
+           lastName = "Unknown";
+           patronymic = "Unknown";
+           day_birth = 0;
+           month_birth = 0;
+           year_birth = 0;
         }
 
         public bool isEmpty()
         {
             return name == "Unknown";
+
         }
 
 
