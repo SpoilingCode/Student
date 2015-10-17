@@ -203,16 +203,16 @@ namespace AppStudent
                 
               Student[] arrStudents = new Student[ students.Length ];
 
-              for (int i = 0, j = 0; i < students.Length; i++, j++ )
+              for ( int i = 0; i < students.Length; i++ )
               {
                   if (students[i].LastName != readSurname && !students[i].isEmpty())
                   {
-                      arrStudents[j] = students[i];
+                      arrStudents[i] = students[i];
                   }
                   else
                   {
                      students[i].makeEmpty();
-                     arrStudents[j] = students[i];
+                     arrStudents[i] = students[i];
                   }
               }
              
