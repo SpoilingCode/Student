@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppStudent
 {
-    class Student : IComparable, IComparer
+    class Student 
     {
        
         static public int quantityObjects = 0;
@@ -298,9 +298,12 @@ namespace AppStudent
 
             if (numbersStudents == 0) { throw new Exception("\nВ списке нет студентов"); }
             bool flag = false;
+           
+            Student stud = new Student();
+            stud.Year_birth = readYearBirth;
             for (int i = 0; i < numbersStudents; i++)
             {
-                if (arrStudents[i].Year_birth == readYearBirth)
+                if (arrStudents[i] == stud)
                 {
                     arrStudents[i].outputDataAboutStudents();
                     flag = true;
@@ -372,7 +375,7 @@ namespace AppStudent
                 return string.Compare( firstStudent.lastName, secondStudent.lastName );
             }
         }
-        public class SortByFullDate : IComparer
+        public class SortByFullDateBirth : IComparer
         {
 
             public int Compare(object ob1, object ob2)
@@ -380,15 +383,15 @@ namespace AppStudent
                 Student firstStudent = (Student)ob1;
                 Student secondStudent = (Student)ob2;
 
-                if (firstStudent.day_birth > secondStudent.day_birth ||
-                  firstStudent.month_birth > secondStudent.month_birth || 
-                    firstStudent.year_birth > secondStudent.year_birth) return 1;
-              
-                if (firstStudent.day_birth < secondStudent.day_birth || 
-                    firstStudent.month_birth < secondStudent.month_birth ||
-                    firstStudent.year_birth < secondStudent.year_birth) return -1;
-                return 0;
+                if (firstStudent.year_birth > secondStudent.year_birth ) return 1;
+                if (firstStudent.year_birth < secondStudent.year_birth) return -1;
 
+                if (firstStudent.month_birth > secondStudent.month_birth) return 1;
+                if (firstStudent.month_birth < secondStudent.month_birth) return -1;      
+
+                if (firstStudent.day_birth > secondStudent.day_birth) return 1;
+                if (firstStudent.day_birth < secondStudent.day_birth) return -1;
+                return 0;
             }
         }
         
@@ -403,14 +406,5 @@ namespace AppStudent
         }
 
 
-        public int CompareTo(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Compare(object x, object y)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -36,7 +36,8 @@ namespace AppStudent
                 Console.WriteLine("6 - Операция класса: Вычисление разницы в возрасте (в днях) для двух студентов");
                 Console.WriteLine("7 - Поиск в массиве всех студентов заданного года рождения");
                 Console.WriteLine("8 - Удаление студента с заданной фамилией из массива");
-                Console.WriteLine("9 - Сортировка по полной фамилии");
+                Console.WriteLine("9 - Сортировка по полной дате рождения");
+                Console.WriteLine("10 - Сортировка по полной ФИО");
                 Console.WriteLine("0 - Выход");
 
                 try
@@ -143,12 +144,28 @@ namespace AppStudent
                         case 9:
                             {
 
-
-                                Array.Sort( students, new Student.SortByFullDate());
-                                  foreach ( Student elem in students ) 
+                                  Console.WriteLine( "Сортировка по полной дате рождения:" );
+                                  Array.Sort( students, new Student.SortByFullDateBirth());
+                                  foreach (Student elem in students)
                                   {
+                                      if( !elem.isEmpty() )
                                       elem.outputDataAboutStudents();
                                   }
+                                  break;
+                                
+                            }
+                        case 10:
+                            {
+
+                                Console.WriteLine("Сортировка по ФИО:");
+                                Array.Sort(students, new Student.SortByName());
+                                Array.Sort(students, new Student.SortByPatronymic());
+                                Array.Sort(students, new Student.SortByLastName());
+                                foreach (Student elem in students)
+                                {
+                                    if( !elem.isEmpty() )
+                                    elem.outputDataAboutStudents();
+                                }
                                 break;
                             }
                         default: Console.WriteLine( "Ошибка ввода\n" ); break;
@@ -278,7 +295,7 @@ namespace AppStudent
                
                 Student[] arrayStudents = 
               {
-                  new Student("Александр", "Петрович", "Иванов", 13, 5, 1992),
+                  new Student("Александр", "Петрович", "Ярмолаев", 13, 5, 1992),
                   new Student("Валерий" , "Михайлович", "Островский", 14, 10, 1996),
                   new Student("Дмитрий", "Александрович", "Колосов", 21, 5, 1996),
                   new Student("Валентин" , "Андреевич", "Ломов", 11, 1, 1993),
