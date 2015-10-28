@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppStudent
 {
-    class Student
+    class Student : IComparable, IComparer
     {
        
         static public int quantityObjects = 0;
@@ -226,7 +227,7 @@ namespace AppStudent
                 Name = Console.ReadLine();
                 if ( Name == "" )
                 {
-                    throw new Exception("Вы ничего не ввели.Повторите ввод.");
+                   Console.WriteLine("Вы ничего не ввели.Повторите ввод.");
                 }
               
 
@@ -234,7 +235,7 @@ namespace AppStudent
                 Patronymic = Console.ReadLine();
                 if ( Patronymic == "" )
                 {
-                    throw new Exception("Вы ничего не ввели.Повторите ввод.");
+                   Console.WriteLine("Вы ничего не ввели.Повторите ввод.");
                 }
                
 
@@ -242,7 +243,7 @@ namespace AppStudent
                 LastName = Console.ReadLine();
                 if ( LastName == "" )
                 {
-                    throw new Exception("Вы ничего не ввели.Повторите ввод.");
+                    Console.WriteLine("Вы ничего не ввели.Повторите ввод.");
                 } 
               
 
@@ -250,7 +251,7 @@ namespace AppStudent
                 Day_birth = int.Parse(Console.ReadLine());
                 if (Day_birth < 1 || Day_birth > 31)
                 {
-                    throw new Exception("День рождения указан неверно.Значение должно быть в интервале [1, 31]");
+                    Console.WriteLine("День рождения указан неверно.Значение должно быть в интервале [1, 31]");
                 } 
                
 
@@ -258,7 +259,7 @@ namespace AppStudent
                 Month_birth = Convert.ToInt32(Console.ReadLine());
                 if (Month_birth < 1|| Month_birth > 12)
                 {
-                    throw new Exception("Месяц рождения указан неверно.Значение должно быть в интервале [1, 12]");
+                    Console.WriteLine("Месяц рождения указан неверно.Значение должно быть в интервале [1, 12]");
                 }
                 
 
@@ -266,11 +267,9 @@ namespace AppStudent
                 Year_birth = int.Parse(Console.ReadLine());
                 if (Year_birth < 1985 ||  Year_birth > 2015)
                 {
-                  throw new Exception("Год рождения указан неверно.Значение должно быть в интервале [1985, 2015]");
+                  Console.WriteLine("Год рождения указан неверно.Значение должно быть в интервале [1985, 2015]");
                 }
         }
-
-      
 
         public void outputDataAboutStudents()
         {
@@ -280,7 +279,7 @@ namespace AppStudent
 
         public void makeEmpty()
         {
-            name = "Unknown";
+           name = "Unknown";
            lastName = "Unknown";
            patronymic = "Unknown";
            day_birth = 0;
@@ -291,7 +290,6 @@ namespace AppStudent
         public bool isEmpty()
         {
             return name == "Unknown";
-
         }
 
 
@@ -316,7 +314,84 @@ namespace AppStudent
 
         }
 
+        public override bool Equals(object inputObj)
+        {
+            if ( inputObj == null || GetType() != inputObj.GetType() )
+                return false;
 
+            Student temp = ( Student )inputObj;
+            return ( Year_birth == temp.Year_birth );
+        }
+
+        public override int GetHashCode()
+        {
+            return year_birth.GetHashCode();
+        }
+
+        public static bool operator == ( Student firstStudent, Student secondStudent )
+        {
+            return firstStudent.Equals( secondStudent );
+        }
+
+        public static bool operator !=(Student firstStudent, Student secondStudent)
+        {
+            return !firstStudent.Equals( secondStudent );
+        }
+
+        public class SortByName : IComparer
+        {
+
+            public int Compare(object ob1, object ob2)
+            {
+                Student firstStudent = (Student)ob1;
+                Student secondStudent = (Student)ob2;
+                return string.Compare( firstStudent.name, secondStudent.name );
+
+            }
+        }
+        public class SortByPatronymic : IComparer
+        {
+
+            public int Compare(object ob1, object ob2)
+            {
+                Student firstStudent = (Student)ob1;
+                Student secondStudent = (Student)ob2;
+                return string.Compare( firstStudent.patronymic, secondStudent.patronymic );
+
+            }
+        }
+
+        public class SortByLastName : IComparer
+        {
+
+            public int Compare(object ob1, object ob2)
+            {
+                Student firstStudent = ( Student )ob1;
+                Student secondStudent = ( Student )ob2;
+
+                return string.Compare( firstStudent.lastName, secondStudent.lastName );
+            }
+        }
+        public class SortByFullDate : IComparer
+        {
+
+            public int Compare(object ob1, object ob2)
+            {
+                Student firstStudent = (Student)ob1;
+                Student secondStudent = (Student)ob2;
+
+                if (firstStudent.day_birth > secondStudent.day_birth ||
+                  firstStudent.month_birth > secondStudent.month_birth || 
+                    firstStudent.year_birth > secondStudent.year_birth) return 1;
+              
+                if (firstStudent.day_birth < secondStudent.day_birth || 
+                    firstStudent.month_birth < secondStudent.month_birth ||
+                    firstStudent.year_birth < secondStudent.year_birth) return -1;
+                return 0;
+
+            }
+        }
+        
         public static int operator - ( Student firstStudent, Student secondStudent )
         {
             DateTime dateBirthFirstStudent = new DateTime( firstStudent.Year_birth, firstStudent.Month_birth, firstStudent.Day_birth );
@@ -327,5 +402,15 @@ namespace AppStudent
             return timeSpan.Days;
         }
 
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Compare(object x, object y)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

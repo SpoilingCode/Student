@@ -36,6 +36,7 @@ namespace AppStudent
                 Console.WriteLine("6 - Операция класса: Вычисление разницы в возрасте (в днях) для двух студентов");
                 Console.WriteLine("7 - Поиск в массиве всех студентов заданного года рождения");
                 Console.WriteLine("8 - Удаление студента с заданной фамилией из массива");
+                Console.WriteLine("9 - Сортировка по полной фамилии");
                 Console.WriteLine("0 - Выход");
 
                 try
@@ -139,6 +140,17 @@ namespace AppStudent
                                 removeStudentInArray(readSurname);
                                 break;
                             }
+                        case 9:
+                            {
+
+
+                                Array.Sort( students, new Student.SortByFullDate());
+                                  foreach ( Student elem in students ) 
+                                  {
+                                      elem.outputDataAboutStudents();
+                                  }
+                                break;
+                            }
                         default: Console.WriteLine( "Ошибка ввода\n" ); break;
 
                     }
@@ -200,31 +212,32 @@ namespace AppStudent
             }
             else
             {
-                
-              Student[] arrStudents = new Student[ students.Length ];
 
-              for ( int i = 0; i < students.Length; i++ )
-              {
-                  if (students[i].LastName != readSurname && !students[i].isEmpty())
-                  {
-                      arrStudents[i] = students[i];
-                  }
-                  else
-                  {
-                     students[i].makeEmpty();
-                     arrStudents[i] = students[i];
-                  }
-              }
-             
-                Array.Copy( arrStudents, students, students.Length );
-             
-                for (int i = 0; i < students.Length; i++ )
-              {
-                  if ( !students[i].isEmpty() )
-                  {
-                      students[i].outputDataAboutStudents();
-                  }
-              }
+                Student[] arrStudents = new Student[students.Length];
+
+                for (int i = 0; i < students.Length; i++)
+                {
+                    if (students[i].LastName != readSurname && !students[i].isEmpty())
+                    {
+                        arrStudents[i] = students[i];
+                    }
+                    else if (students[i].LastName == readSurname)
+                    {
+                        students[i].makeEmpty();
+                        arrStudents[i] = students[i];
+                    }
+                    else arrStudents[i] = students[i];
+                }
+
+                Array.Copy(arrStudents, students, students.Length);
+
+                for (int i = 0; i < students.Length; i++)
+                {
+                    if (!students[i].isEmpty())
+                    {
+                        students[i].outputDataAboutStudents();
+                    }
+                }
             }
         }
 
