@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace AppStudent
 {
@@ -38,6 +39,7 @@ namespace AppStudent
                 Console.WriteLine("8 - Удаление студента с заданной фамилией из массива");
                 Console.WriteLine("9 - Сортировка по полной дате рождения");
                 Console.WriteLine("10 - Сортировка по полной ФИО");
+                Console.WriteLine("11 - Записать массив студентов в файл");
                 Console.WriteLine("0 - Выход");
 
                 try
@@ -168,12 +170,30 @@ namespace AppStudent
                                 }
                                 break;
                             }
+                        case 11:
+                            {
+                                writeToFileArrayStudents();
+                                foreach (Student elem in students)
+                                {
+                                    if (!elem.isEmpty())
+                                        elem.outputDataAboutStudents();
+                                }
+                                break;
+                            }
+                        
                         default: Console.WriteLine( "Ошибка ввода\n" ); break;
 
                     }
 
                 }
+                catch ( FileNotFoundException )
+                {
 
+                    Console.WriteLine("Файла с таким именем не существует");
+                    Console.WriteLine("Для продолжения нажмите Enter");
+                    Console.ReadKey();
+
+                }
                 catch (Exception ex)
                 {
 
@@ -258,42 +278,107 @@ namespace AppStudent
             }
         }
 
+        static void writeToFileArrayStudents() 
+        {
+            if (numberStudents == 0) Console.WriteLine("Массив студентов не сформирован");
+            else
+            {
+                Console.WriteLine("Ввведите название нового файла:");
+                string newFileName = Console.ReadLine();
+
+                using (StreamWriter writer = new StreamWriter(newFileName))
+                {
+                    for (int i = 0; i < students.Length; i++)
+                    {
+                        if (!students[i].isEmpty())
+                        {
+                            writer.WriteLine("ФИО: {0} {1} {2} Дата рождения: {3}.{4}.{5}", students[i].LastName, students[i].Name, students[i].Patronymic,
+                                                                        students[i].Day_birth, students[i].Month_birth, students[i].Year_birth);
+                        }
+                    }
+                }
+            }
+        }
+
+        static void formArrayStudentsFromFile() 
+        {
+            Console.WriteLine( "Введите имя файла" );
+            string fileName = Console.ReadLine( );
+            if ( !File.Exists( fileName ) ) throw new FileNotFoundException();
+
+           using ( StreamReader reader = new StreamReader( fileName, Encoding.Default ) )
+            {
+                string line;
+                int i = 0;
+                string[] buf;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    buf = line.Split( ' ' );
+                    if ( buf.Length == 6 )
+                    {
+                        students[i].LastName = buf[0];
+                        students[i].Name = buf[1];
+                        students[i].Patronymic = buf[2];
+                        students[i].Day_birth = Convert.ToInt32( buf[3] );
+                        students[i].Month_birth = Convert.ToInt32( buf[4] );
+                        students[i].Year_birth = Convert.ToInt32( buf[5] );
+                        i++;
+                    }
+                }
+            }    
+        }
 
         static void new_array()
         {
 
-            Console.WriteLine( "Будете вводить данные с клавиатуры?(y/n)" );
-            char readStr = char.Parse( Console.ReadLine() );
+            Console.WriteLine("Будете вводить данные с клавиатуры?(y/n)");
+            char readStr = char.Parse(Console.ReadLine());
 
-            if ( readStr == 'y' || readStr == 'Y' )
+           if (readStr == 'y' || readStr == 'Y')
             {
 
-                Console.WriteLine( "Введите количество студентов < " + maxNumberStudents );
+                Console.WriteLine("Введите количество студентов < " + maxNumberStudents);
                 string readNumber = Console.ReadLine();
-                int quantityStudents = int.Parse( readNumber );
-               
-                 if( !int.TryParse(readNumber, out quantityStudents) )
+                int quantityStudents = int.Parse(readNumber);
+
+              if (!int.TryParse(readNumber, out quantityStudents))
                 {
-                    throw new Exception( "Некорректный ввод.Введите число!" );
+                    throw new Exception("Некорректный ввод.Введите число!");
                 }
-                 else 
-                 {
-                 
-
-                   for ( int i = 1; i <= quantityStudents; i++ )
-                   {
-                       addStudent();
-                   }
-
-                Console.WriteLine( "\nФормирование списка завершено." );
-                 
-                 }
+                
+              else
+                {
+                    for (int i = 1; i <= quantityStudents; i++)
+                    {
+                        addStudent();
+                    }
+                    Console.WriteLine("\nФормирование списка завершено.");
+                }
             }
 
-            else
+           else
             {
-               
-                Student[] arrayStudents = 
+                Console.WriteLine("Сформировать массив студентов из файла?(y/n)");
+                char readLine = char.Parse(Console.ReadLine());
+
+              if (readLine == 'y' || readLine == 'Y')
+                {
+                    formArrayStudentsFromFile();
+                    foreach (Student st in students)
+                    {
+                        if (!st.isEmpty())
+                        {
+                            st.outputDataAboutStudents();
+                            numberStudents++;
+                        }
+                    }
+                }
+           
+               else
+                {
+
+                    Student[] arrayStudents = 
               {
                   new Student("Александр", "Петрович", "Ярмолаев", 13, 5, 1992),
                   new Student("Валерий" , "Михайлович", "Островский", 14, 10, 1996),
@@ -305,18 +390,18 @@ namespace AppStudent
                   
               };
 
-                for (int i = 0; i < arrayStudents.Length; i++)
-                {
-                    students[i] = arrayStudents[i];
-                    numberStudents++;
+                    for (int i = 0; i < arrayStudents.Length; i++)
+                    {
+                        students[i] = arrayStudents[i];
+                        numberStudents++;
+                    }
+
+                    Console.WriteLine("\nСписок студентов сформирован из заданного массива ");
                 }
 
-                Console.WriteLine("\nСписок студентов сформирован из заданного массива ");
             }
 
         }
-
-
         
     }
 
