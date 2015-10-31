@@ -292,8 +292,9 @@ namespace AppStudent
                     {
                         if (!students[i].isEmpty())
                         {
-                            writer.WriteLine("ФИО: {0} {1} {2} Дата рождения: {3}.{4}.{5}", students[i].LastName, students[i].Name, students[i].Patronymic,
-                                                                        students[i].Day_birth, students[i].Month_birth, students[i].Year_birth);
+                            writer.WriteLine("ФИО: {0} {1} {2} Дата рождения: {3}.{4}.{5}", 
+                                              students[i].LastName, students[i].Name, students[i].Patronymic,
+                                              students[i].Day_birth, students[i].Month_birth, students[i].Year_birth);
                         }
                     }
                 }
